@@ -26,9 +26,6 @@ export const useFetch = ( url ) => {
 
     const getFetch = async () => {
 
-        //vuelvo a obtener la data pero desde cache 
-        //para no volver a realizar la peticion siempre
-
         if( localCache[url] ){
             console.log('usando cache');
             setState({
@@ -44,8 +41,6 @@ export const useFetch = ( url ) => {
         setLoadingState();
         
         const resp = await fetch( url );
-
-        //sleep
 
         await new Promise( resolve => setTimeout(resolve, 1500) );
 
@@ -70,7 +65,6 @@ export const useFetch = ( url ) => {
             error: null
         })
 
-        //manejo del cache, guardo la data
         localCache[url] = data;
 
         console.log({data});

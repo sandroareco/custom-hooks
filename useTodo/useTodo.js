@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from "react";
-import { todoReducer } from '../06-useReducer/todoReducer';
+import { todoReducer } from './todoReducer';
 
-//realizamos este paso para que ni bien inicie nuestra app recupere los datos del LS
 const init = () => {
     return JSON.parse( localStorage.getItem('todos') ) || [];
 }
@@ -10,7 +9,6 @@ export const useTodo = () => {
 
     const [todos, dispatch] = useReducer(todoReducer, [], init);
 
-    //cuando agrego una tarea necesito un efecto secundario
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos])
@@ -47,4 +45,5 @@ export const useTodo = () => {
         todosCount: todos.length,
         pendingTodosCount: todos.filter( todo => !todo.done ).length
     }
+    
 }
